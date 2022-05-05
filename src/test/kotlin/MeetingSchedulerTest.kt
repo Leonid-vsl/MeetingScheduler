@@ -6,7 +6,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 import java.net.MalformedURLException
 
 @ExtendWith(MockitoExtension::class)
-class SampleTest {
+class MeetingSchedulerTest {
 
 
     @Test
