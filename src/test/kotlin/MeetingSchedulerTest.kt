@@ -12,27 +12,27 @@ class MeetingSchedulerTest {
     @Test
     fun `test 1`() {
 
-       val s=  Scheduler()
+        val s = MeetingScheduler()
 
-        s.add(0,30)
-        s.add(5,10)
-        s.add(15,20)
+        s.add(0, 30)
+        s.add(5, 10)
+        s.add(15, 20)
 
 
-        assertEquals(2,s.requiredRooms())
+        assertEquals(2, s.requiredRooms())
 
     }
 
     @Test
     fun `test 2`() {
 
-        val s=  Scheduler()
+        val s = MeetingScheduler()
 
-        s.add(7,10)
-        s.add(2,4)
+        s.add(7, 10)
+        s.add(2, 4)
 
 
-        assertEquals(1,s.requiredRooms())
+        assertEquals(1, s.requiredRooms())
 
     }
 
@@ -40,17 +40,17 @@ class MeetingSchedulerTest {
     @Test
     fun `test 3`() {
 
-        val s=  Scheduler()
+        val s = MeetingScheduler()
 
-        s.add(8,12)
-        s.add(10,20)
-        s.add(3,19)
-        s.add(11,30)
-        s.add(1,10)
-        s.add(2,7)
+        s.add(8, 12)
+        s.add(10, 20)
+        s.add(3, 19)
+        s.add(11, 30)
+        s.add(1, 10)
+        s.add(2, 7)
 
 
-        assertEquals(4,s.requiredRooms())
+        assertEquals(4, s.requiredRooms())
 
     }
 
