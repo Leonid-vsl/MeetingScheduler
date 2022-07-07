@@ -4,39 +4,19 @@ import kotlin.collections.HashMap
 class TopNElements {
 
 
-    //O(n) + ~0(n)
-    fun getTop(arr: IntArray, N: Int): List<Int> {
+    fun getTop(arr: IntArray, N: Int): Int {
         //log(K)
         val topN = TreeSet<Element>()
-        val counters = HashMap<Int, Int>()
-        arr.forEach {
-            val freq = counters[it]
-
-            if (freq != null) {
-                counters[it] = freq + 1
-            } else {
-                counters[it] = 1
+        arr.forEachIndexed{ idx, item ->
+            topN.add(Element(idx,item))
+            if(topN.size > N){
+                val low = topN.last()
+                topN.remove(low)
             }
         }
-
-
-
-        counters.forEach {
-
-            topN.add(Element(it.key, it.value))
-
-            if (topN.size > N) {
-
-                val last = topN.last()
-
-                topN.remove(last)
-
-            }
-
-        }
-
-        return topN.map { it.key }.sorted()
+        return topN.last().freq
     }
+
 
     data class Element(val key: Int, val freq: Int) : Comparable<Element> {
 
@@ -46,38 +26,6 @@ class TopNElements {
 
 
         }
-    }
-
-    fun getTop1(arr: IntArray, N: Int): List<Int> {
-
-        val counters = TreeSet<Element>()
-        var topFreq = 1
-        arr.forEach { item ->
-
-            var hasMatch = false
-            var newMax = 0
-            for (i in 1..topFreq) {
-
-                if (counters.contains(Element(item, i))) {
-                    hasMatch = true
-                    counters.remove(Element(item, i))
-                    newMax = i + 1
-                    counters.add(Element(item, newMax))
-                    break
-
-                }
-            }
-            if (topFreq < newMax) {
-                topFreq = newMax
-            }
-
-
-            if (!hasMatch) {
-                counters.add(Element(item, 1))
-            }
-        }
-
-        return counters.take(N).map { it.key }
     }
 
 }
