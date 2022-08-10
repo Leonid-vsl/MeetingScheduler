@@ -20,7 +20,7 @@ class IpAddressCheck {
 
         val ips = mutableListOf<List<String>>()
 
-        doCheck(str, ips, mutableListOf(), str, 3, 4, 0)
+        doCheck(ips, mutableListOf(), str, 3, 4, 0)
         return ips.map {
             it.joinToString(separator = ".")
         }
@@ -28,7 +28,6 @@ class IpAddressCheck {
 
 
     private fun doCheck(
-        or: String,
         ips: MutableList<List<String>>,
         ip: MutableList<String>,
         str: String,
@@ -59,7 +58,7 @@ class IpAddressCheck {
                 val intValue = strValue.toInt()
                 if(intValue <= 255 && (strValue.length == 1 || (strValue.length > 1 && !strValue.startsWith("0")))){
                     newIp.add(strValue)
-                    doCheck(or, ips, newIp, str.drop(i + 1), groupsLen, groupsTotal, level + 1)
+                    doCheck(ips, newIp, str.drop(i + 1), groupsLen, groupsTotal, level + 1)
                 }
             }
 
