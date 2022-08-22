@@ -12,28 +12,38 @@ class EditDistance {
     fun editDistance(a: String, b: String): Int {
 
 
+        if(a.isEmpty() && b.isEmpty()) return 0
 
-        val max = Math.max(a.length,b.length)
-        val min = Math.min(a.length,b.length)
-        val charsA = a.toCharArray()
-        val charsB = b.toCharArray()
-        var prev = IntArray(max)
-        var current = IntArray(max)
+        var longestStr = a
+        var shortestStr = b
+        if (a.length != b.length) {
+            longestStr = if (a.length > b.length) a else b
+            shortestStr = if (a.length < b.length) a else b
+        }
+
+        var prev = IntArray(longestStr.length) { i -> i + 1 }
+        var current = IntArray(longestStr.length)
 
 
-        for(i in 0 until  min){
+        for (i in 0 until shortestStr.length) {
 
-            for(j in i until  max){
-                val prevGr = if(j > 1)prev[j - 1] else 0
-                if(charsA[i] == charsB[j]){
-                    current[j] = prevGr
-                }else{
-                    current[j] = prevGr +1
+            for (j in i until longestStr.length) {
+                val prevGr = if (j >= 1) prev[j - 1] else 0
+                val prevCur = if (i == j) prevGr else {
+                    current[j - 1]
+                }
+                val prevTop = prev[j]
+
+                val new = Math.min(prevTop,Math.min(prevGr, prevCur))
+                if (shortestStr[i] == longestStr[j]) {
+                    current[j] = new
+                } else {
+                    current[j] = new + 1
 
                 }
             }
             prev = current
-            current = IntArray(max)
+            current = IntArray(longestStr.length)
         }
 
         return prev.last()

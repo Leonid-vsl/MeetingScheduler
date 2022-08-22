@@ -51,7 +51,7 @@ class IpAddressCheck {
             if (str.length - 1 < i) {
                 return
             } else {
-                val newElement = str.get(i)
+                val newElement = str[i]
 
                 currentGr.append(newElement)
                 val strValue = currentGr.toString()
