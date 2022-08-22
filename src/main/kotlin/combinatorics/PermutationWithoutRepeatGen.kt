@@ -34,7 +34,7 @@ class PermutationWithoutRepeatGen {
             newRes.addAll(res)
             newRes.add(item)
 
-            gen0(collector, newRes, source.filter { it == item }, level+1, size)
+            gen0(collector, newRes, source.filter { it != item }, level+1, size)
 
         }
 
