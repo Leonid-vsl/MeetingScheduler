@@ -1,16 +1,16 @@
 package combinatorics
 
-class PermutationWithRepeatGen {
+class PermutationWithoutRepeatGen {
 
 
     /**
      *
-     *   Generate permutation with repeat
+     *   Generate permutation without repeat
      *
-     *   for instance for 3 it produce 27 results
+     *   for instance for 3 it produce 6 results
      *
      *
-     *   111 -> 112 -> 113 -> 121 -> 122 -> 123 -> 131... -> 333
+     *   123, 231, 312, 132, 321, 213
      *
      */
     fun generate(source: List<String>): List<List<String>> {
@@ -34,7 +34,7 @@ class PermutationWithRepeatGen {
             newRes.addAll(res)
             newRes.add(item)
 
-            gen0(collector, newRes, source, level+1, size)
+            gen0(collector, newRes, source.filter { it == item }, level+1, size)
 
         }
 
